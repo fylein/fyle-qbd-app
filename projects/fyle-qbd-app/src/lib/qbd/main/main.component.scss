@@ -1,0 +1,11 @@
+:host ::ng-deep .main-tab .p-tabmenu .p-tabmenu-nav .p-tabmenuitem:not(.p-highlight):hover, :host ::ng-deep .main-tab .p-tabmenu .p-tabmenu-nav .p-tabmenuitem:not(.p-highlight):hover .p-menuitem-link{
+    @apply tw-bg-disabled-bg-color tw-text-menu-inactive-text-color tw-font-500 tw-border-b-0 #{!important};
+}
+
+:host ::ng-deep .main-tab .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight {
+    @apply tw-bg-white #{!important};
+}
+
+:host ::ng-deep .main-tab .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+    @apply tw-text-slightly-normal-text-color tw-border-b-2 tw-border-b-slightly-normal-text-color tw-font-500 tw-bg-white #{!important};
+}

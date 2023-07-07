@@ -1,0 +1,22 @@
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+    background-color: transparent;
+    @apply tw-px-24-px tw-py-12-px tw-mx-10-px tw-mt-0 tw-border-x-box-color tw-border-t-box-color tw-border-t tw-border-x tw-rounded-t-lg #{!important};
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link, :host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link:not(.p-disabled):hover {
+    @apply tw-text-slightly-normal-text-color tw-border-b-transparent tw-bg-white #{!important};
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem:not(.p-highlight):hover, :host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem:not(.p-highlight):hover .p-menuitem-link{
+    background-color: transparent !important;
+    @apply tw-border-b-transparent tw-font-500 #{!important};
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-highlight):hover{
+    @apply tw-border-b-transparent tw-font-500 tw-bg-disabled-bg-color #{!important};
+}
+
+:host ::ng-deep .p-tabmenu .p-tabmenu-nav {
+    background-color: transparent;
+    @apply tw-border-b tw-border-b-box-color #{!important};
+}

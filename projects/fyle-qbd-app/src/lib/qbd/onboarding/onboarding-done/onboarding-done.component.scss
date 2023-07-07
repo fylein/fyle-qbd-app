@@ -1,0 +1,12 @@
+.onboarding-done {
+  
+    &--contents {
+      @apply tw-bg-white tw-border-solid tw-border-disabled-bg-color tw-rounded-8-px tw-box-border tw-shadow-app-card tw-z-50 tw-pt-0 tw-px-100-px tw-pb-20-px ;
+    }
+  
+    &--align-center {
+      @apply tw-my-0 tw-mx-auto tw-block ; 
+    }
+  
+  }
+  

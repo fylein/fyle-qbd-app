@@ -1,0 +1,122 @@
+<div class="tw-absolute tw-bg-header-1 tw-h-110-px tw-w-[100%] tw-z-[-1]"></div>
+<div class="tw-absolute tw-bg-header-2 tw-h-110-px tw-w-[100%] tw-z-[-1]"></div>
+
+<div *ngIf="isLoading" class="tw-flex tw-justify-center tw-items-center tw-h-screen">
+    <fyle-integrations-ui-lib-app-loader></fyle-integrations-ui-lib-app-loader>
+</div>
+
+<div *ngIf="!isLoading" class="tw-py-40-px tw-px-120-px">
+    <div class="tw-shadow-app-card tw-rounded-12-px tw-bg-white tw-border-1-px tw-border-separator">
+        <div class="tw-p-24-px">
+            <div *ngIf="exportPresent" class="tw-flex tw-justify-between tw-items-center ">
+                <div class="tw-w-3/5">
+                    <h3 class="tw-text-18-px tw-font-500 tw-text-slightly-normal-text-color">Instantly download expenses from Fyle as an IIF file.</h3>
+                    <h5 class="tw-text-14-px tw-font-400 tw-text-slightly-normal-text-color tw-pt-2-px">The IIF files will be generated based on your configuration.</h5>
+                </div>
+                <div class="tw-flex tw-items-end tw-justify-end">
+                    <div>
+                        <button type="button" class="export-btn tw-float-right tw-flex tw-justify-end tw-items-center tw-text-white tw-text-500 tw-px-24-px tw-py-12-px tw-bg-mandatory-field-color tw-rounded-4-px" (click)="triggerExports()" [disabled]="exportInProgress" >
+                            <p class="tw-text-14-px tw-font-400 tw-pl-5px" *ngIf="!exportInProgress">Export IIF file
+                                <i class="tw-pl-10-px tw-pt-2-px !tw-text-12-px pi pi-arrow-right"></i>
+                            </p>
+                            <p class="tw-text-14-px tw-font-400 tw-pl-5px" *ngIf="exportInProgress">Exporting ...
+                            </p>
+                        </button><br>
+                        <p *ngIf="nextExportDate" class="tw-pt-8-px tw-float-right tw-text-12-px tw-font-500 tw-text-faded-text-color">Next automated export schedule: {{ nextExportDate | date : 'd MMM, yyyy'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!exportPresent" class="tw-flex tw-justify-between tw-items-center ">
+                <div class="tw-flex tw-items-start">
+                    <div class="tw-pr-14-px">
+                        <img src="assets/icons/pinktick.svg" >
+                    </div>
+                    <div>
+                        <h3 class="tw-text-20-px tw-font-500 tw-text-normal-text-color">You are all caught up!</h3>
+                        <h5 class="tw-text-14-px tw-font-400 tw-text-faded-text-color tw-pt-2-px"> There are no expense in Fyle as per the configuration setup to export.</h5>
+                    </div>
+                </div>
+                <div>
+                    <img src="assets/icons/export.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <div  *ngIf="exportInProgress">
+            <p-progressBar class="!tw-h-6-px" [value]="exportProgressPercentage" [showValue]='false'></p-progressBar>
+        </div>
+    </div>
+    <div class="tw-mt-40-px tw-shadow-app-card tw-rounded-12-px tw-bg-white tw-border-1-px tw-border-separator">
+        <div class="tw-flex tw-justify-between tw-items-center tw-p-24-px">
+            <div>
+                <h4 class="tw-font-500">IIF file logs</h4>
+            </div>
+            <div *ngIf="isRecordPresent" [formGroup]="exportLogForm" class="tw-flex tw-justify-start tw-items-center tw-border tw-border-box-color tw-pl-16-px tw-rounded-4-px drop-down">
+                <div>
+                    <svg-icon-sprite src="calender" width="20px" height="20px" class="tw-text-placeholder"></svg-icon-sprite>
+                </div>
+                <p-dropdown [options]="dateOptions" formControlName="dateRange" (onChange)="dateFilter($event)" (click)="dropDownWatcher()">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <div *ngIf="exportLogForm.controls.dateRange.value">
+                            <div class="my-dropdown-selected-item">
+                                {{exportLogForm.controls.dateRange.value.dateRange}}
+                              </div>
+                        </div>
+                        <div *ngIf="!exportLogForm.controls.dateRange.value">
+                            <div class="my-dropdown-selected-item tw-text-placeholder">
+                                Select date range
+                              </div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-date pTemplate="item">
+                        <div>
+                            <p-calendar (click)="showCalendar($event)" placeholder="Custom dates" formControlName="start" (onClose)="getDates()" [touchUI]="isCalendarVisible" *ngIf="date.dateRange === presentDate" selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+                            <p class="tw-text-sub-text-color tw-text-14-px" [ngClass]="{'!tw-text-mandatory-field-color' : exportLogForm.controls.dateRange.value === date }" *ngIf="date.dateRange !== presentDate">{{ date.dateRange | titlecase | snakeCaseToSpaceCase }}</p>
+                            <p class="tw-text-sub-text-color tw-text-12-px" *ngIf="date.dateRange !== presentDate && date.dateRange !== 'Today'">{{date.startDate | date : 'MMM dd, yyyy'}} - {{date.endDate | date : 'MMM dd, yyyy'}}</p>
+                            <p class="tw-text-sub-text-color tw-text-12-px" *ngIf="date.dateRange === 'Today'">{{date.startDate | date : 'MMM dd, yyyy'}}</p>
+                        </div>
+                    </ng-template> 
+                </p-dropdown>
+
+            </div>
+        </div>
+        <div class="tw-pt-24-px tw-border-y-2-px tw-border-y-separator tw-box-border tw-px-24-px tw-pt-24-px">
+            <div *ngIf="accountingExports.count > 0">
+                <p-table [value]="accountingExports.results">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Date and Time of Export</th>
+                            <th>Exported to QBD as</th>
+                            <th>Expense Type</th>
+                            <th>Download IIF File</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-exports let-i="rowIndex">
+                        <tr>
+                            <td>
+                                <p class="tw-font-400 tw-text-sub-text-color">{{exports.created_at | date}}</p>
+                                <span class="tw-font-400 !tw-text-12-px tw-text-placeholder">{{exports.created_at | date : "HH:ss"}}</span>
+                            </td>
+                            <td>{{getTypeString(exports.type)| titlecase }}</td>
+                            <td>{{getExpenseType(exports.fund_source)| titlecase }}</td>
+                            <td>
+                                <div *ngIf="!downloadingExportId[i]">
+                                    <button (click)="getDownloadLink(exports,i)" pTooltip="Download" tooltipPosition="top"><svg-icon-sprite class="tw-pt-5-px" src="download" width="20px" hight="20px"></svg-icon-sprite></button>
+                                </div>
+                                <div *ngIf="downloadingExportId[i]" class="tw-flex tw-items-center">
+                                    <i class="pi pi-spin pi-spinner tw-text-sub-text-color tw-text-16-px"></i>
+                                    <p class="tw-text-14-px tw-text-sub-text-color tw-pl-10-px">downloading...</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div *ngIf="accountingExports.count === 0">
+                <fyle-integrations-ui-lib-app-zero-state-with-illustration></fyle-integrations-ui-lib-app-zero-state-with-illustration>
+            </div>
+        </div>
+        <div *ngIf="accountingExports.count > 0" class="tw-p-24-px">
+            <fyle-integrations-ui-lib-app-paginator [totalCount]="totalCount" (offsetChangeEvent)="offsetChanges($event)" (pageChangeEvent)="pageChanges($event)"></fyle-integrations-ui-lib-app-paginator>
+        </div>
+    </div>
+</div>

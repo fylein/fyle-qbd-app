@@ -1,0 +1,59 @@
+:host ::ng-deep .drop-down .p-dropdown {
+    @apply tw-w-200-px tw-border-0 #{!important};
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    @apply tw-text-sub-text-color tw-text-14-px tw-font-400 tw-py-14-px tw-px-22-px tw-border-t tw-border-b-0 tw-border-t-box-color  #{!important};
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    @apply tw-text-slightly-normal-text-color tw-text-12-px tw-font-500 tw-py-12-px tw-px-22-px tw-border tw-border-box-color tw-bg-disabled-bg-color #{!important}
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td > button {
+    @apply tw-pl-48-px #{!important};
+}
+
+:host ::ng-deep .p-progressbar {
+    @apply tw-h-1.5 tw-bg-progress-bar-bg #{!important};
+}
+
+:host ::ng-deep .p-progressbar .p-progressbar-value {
+    @apply tw-bg-mandatory-field-color tw-rounded-50  #{!important};
+}
+
+:host ::ng-deep .p-progressbar-determinate .p-progressbar-value {
+    content: none #{!important};
+}
+
+.export-btn:disabled {
+    @apply tw-cursor-not-allowed tw-bg-cta-disabled #{!important};
+}
+
+:host ::ng-deep .p-calendar .p-inputtext {
+    @apply tw-p-0 tw-bg-white tw-border-0 tw-cursor-pointer tw-transition-none	;
+}
+
+:host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):hover .p-calendar .p-inputtext{
+    @apply tw-bg-disabled-bg-color #{!important};
+}
+
+:host ::ng-deep .p-calendar ::placeholder {
+    @apply tw-text-sub-text-color #{!important};
+}
+
+:host ::ng-deep .p-datepicker table td > span.p-highlight {
+    @apply tw-text-white tw-bg-mandatory-field-color #{!important};
+}
+
+:host ::ng-deep .p-datepicker table td > span:focus {
+    @apply tw-shadow-none #{!important};
+}
+
+:host ::ng-deep .p-datepicker table th {
+    @apply tw-text-center ;
+}
+
+:host ::ng-deep .p-datepicker-touch-ui, .p-calendar .p-datepicker-touch-ui {
+    @apply tw-min-w-fit tw-top-2/3 #{!important};
+}
