@@ -2,9 +2,7 @@
  * Public API Surface of fyle-qbd-app
  */
 
-export * from './lib/test/test.module';
 export * from './lib/qbd/qbd.module';
-export * from './lib/qbd/qbd-routing.module';
 export * from './lib/qbd/main/main.module';
 export * from './lib/qbd/main/main.component';
 export * from './lib/qbd/onboarding/onboarding.module';

@@ -1,10 +1,10 @@
 {
   "name": "fyle-qbd-app",
-  "version": "0.0.2",
+  "version": "0.0.15",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0",
-    "fyle-integrations-ui-lib": "^0.0.11",
+    "fyle-integrations-ui-lib": "^0.0.16",
     "@auth0/angular-jwt": "^5.1.0",
     "ts-cacheable": "^1.0.8",
     "ng-svg-icon-sprite": "^1.12.0",
