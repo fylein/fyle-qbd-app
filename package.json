@@ -24,7 +24,7 @@
     "fyle-integrations-ui-lib": "^0.0.16"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.8",
+    "@angular-devkit/build-angular": "^14.2.13",
     "@angular/cli": "~14.2.8",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
